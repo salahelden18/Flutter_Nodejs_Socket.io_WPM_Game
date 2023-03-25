@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+import 'package:multiplayer_game/provider/game_state_provider.dart';
+import 'package:provider/provider.dart';
+
+class Scoreboard extends StatelessWidget {
+  const Scoreboard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final game = Provider.of<GameStateProvider>(context);
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: game.gameState['players'].length,
+      itemBuilder: (ctx, index) {
+        var playerData = game.gameState['players'][index];
+        return ListTile(
+          title: Text(
+            playerData['nickname'],
+          ),
+          trailing: Text(playerData['WPM'].toString()),
+        );
+      },
+    );
+  }
+}
